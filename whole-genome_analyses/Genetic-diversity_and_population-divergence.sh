@@ -31,8 +31,8 @@ vcftools --vcf filtered_autosomal.vcf --keep pop.list --window-pi 50000 --out po
 vcftools --vcf filtered_autosomal.vcf --weir-fst-pop pop1.list --weir-fst-pop pop2.list --fst-window-size 50000 --out pop1_2
 
 # calculated the dxy
-python2.7 parseVCF.py -v ../filtered_maf_ld.vcf -o filtered_maf_ld.calls -m geno
-python2.7 mergeCalls.py -f filtered_maf_ld.calls -m all -I ASM1340044v1.fa.fai -o filtered_maf_ld.calls.merge
+python2.7 parseVCF.py -v filtered_autosomal.vcf -o filtered_autosomal.calls -m geno
+python2.7 mergeCalls.py -f filtered_autosomal.calls -m all -I ${ref}.fai -o filtered_autosomal.calls.merge
 
 python2.7 egglib_sliding_window.py \
 -i filtered_maf_ld.calls.merge -o filtered_maf_ld.100k.csv \
