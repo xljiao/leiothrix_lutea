@@ -20,7 +20,7 @@ samtools sort ind.bam -o ind.sorted.bam
 samtools rmdup ind.sorted.bam ind.sorted.rmdup.bam 
 
 # Call variants using HaplotypeCaller in GATK v4.0.9.
-gatk HaplotypeCaller -R ${ref} -ERC GVCF -I ind.sorted.rmdup.bam -O ind.g.vcf --genotyping-mode DISCOVERY --pcr-indel-model CONSERVATIVE /
+gatk HaplotypeCaller -R ${ref} -ERC GVCF -I ind.sorted.rmdup.bam -O ind.g.vcf --genotyping-mode DISCOVERY --pcr-indel-model CONSERVATIVE
 --sample-ploidy 2 --min-base-quality-score 5 --kmer-size 10 --kmer-size 25 --native-pair-hmm-threads 40
 gatk CombineGVCFs -R ${ref} -V gvcf.list -O com.g.vcf.gz
 gatk GenotypeGVCFs -R ${ref} -V com.g.vcf.gz -O com.vcf.gz
@@ -31,7 +31,7 @@ gatk GenotypeGVCFs -R ${ref} -V com.g.vcf.gz -O com.vcf.gz
 --minQ 30 --minDP 5 --maxDP 100 --max-missing 0.95 --remove-indels \
 --recode --out flitered_vcf
 
-# Retain autosomal SNPs using BLAST+2.2.26
+# Retain autosomal SNPs using BLAST+2.2.26, and obtain an autosomal dataset named filtered_autosomal.vcf
 parus_major_genome=parus.major.fa
 makeblastdb -in ${parus_major_genome} -dbtype nucl  -title parus_major_fa
 blastn -query ${ref} -db ${parus_major_genome} -evalue 1e-40 -outfmt 7 -out pm_ll_blast.out
