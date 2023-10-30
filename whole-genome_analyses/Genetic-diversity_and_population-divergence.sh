@@ -36,5 +36,5 @@ python2.7 mergeCalls.py -f filtered_autosomal.calls -m all -I ${ref}.fai -o filt
 
 python2.7 egglib_sliding_window.py \
 -i filtered_maf_ld.calls.merge -o filtered_maf_ld.100k.csv \
--w 100000 -m 10 -s 100000 -a dxy \
+-w 50000 -m 5 -s 50000 -a dxy \
 -p "pop1[ind1,ind2,ind3]; pop2[ind1,ind2,ind3]
