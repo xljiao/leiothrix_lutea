@@ -25,3 +25,16 @@ cat ind.a | awk '{print $2}' | sed -n '5,10p' | awk '{ sum += $1; } END { print 
 awk '{for(i=0;++i<=NF;)a[i]=a[i]?a[i] FS $i:$i}END{for(i=0;i++<NF;)print a[i]}' ind.B > ind.B2
 awk '(sum=$2/$1){print sum}' ind.B2 >  ${heter_d}${ind}.B3
 
+# calculate the Tajima's D, nucleotide diversity (π), and population genetic differentiation (FST) 
+vcftools --vcf filtered_autosomal.vcf --keep pop.list --TajimaD 50000 --out pop_tajima
+vcftools --vcf filtered_autosomal.vcf --keep pop.list --window-pi 50000 --out pop_pi
+vcftools --vcf filtered_autosomal.vcf --weir-fst-pop pop1.list --weir-fst-pop pop2.list --fst-window-size 50000 --out pop1_2
+
+# calculated the dxy
+python2.7 parseVCF.py -v ../filtered_maf_ld.vcf -o filtered_maf_ld.calls -m geno
+python2.7 mergeCalls.py -f filtered_maf_ld.calls -m all -I ASM1340044v1.fa.fai -o filtered_maf_ld.calls.merge
+
+python2.7 egglib_sliding_window.py \
+-i filtered_maf_ld.calls.merge -o filtered_maf_ld.100k.csv \
+-w 100000 -m 10 -s 100000 -a dxy \
+-p "pop1[ind1,ind2,ind3]; pop2[ind1,ind2,ind3]
