@@ -18,6 +18,19 @@ do
 admixture --cv -B100 -j40 filtered_autosomal_ld_ad.ped $K | tee log${K}.out
 done
 
+# Phylogenetic inference of mitochondrial tree
+mitobim=/home/software/MITObim/MITObim.pl
+mirapath=/home/software/MITObim/docker/external_software/mira_4.0.2/
+ref=leiothrix_lutea_mt.fasta
+${mitobim} -start 1 -end 30 -sample ind --mirapath ${mirapath} \
+-ref leiothrix -readpool ind.R1.fp.fastq.gz \
+
+${mirapath}miraconvert -f maf -t fasta -r C ind_leiothrix_out.maf ind
+
+# Replace x with N in the fasta file and submit fasta files to http://mitos2.bioinf.uni-leipzig.de/index.py for annotation
+# Script exclude_and_merge_fin.py is then used to combine all the sequences by gene
+python2.7 exclude_and_merge_fin.py
+
 # We use FastTree2 to reconstruct an ML tree based on the general time reversible (GTR) model of nucleotide substitution using concatenated SNPs of autosomal dataset.
 # Convert vcf format to fasta format using vcf2phylip.py (https://github.com/edgardomortiz/vcf2phylip)
 python ${vcf2phylip} -i filtered_autosomal.vcf -o filtered_autosomal -f
