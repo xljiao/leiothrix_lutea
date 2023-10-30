@@ -19,8 +19,15 @@ samtools sort ind.bam -o ind.sorted.bam
 # BAM files remove duplicates 
 samtools rmdup ind.sorted.bam ind.sorted.rmdup.bam 
 
+# Calculate coverage depth, breadth of coverage and mapping rate
+java -jar CollectAlignmentSummaryMetrics.jar R=${ref} I=ind.sorted.rmdup.bam O=ind.map_rate
+
+bedtools genomecov -ibam ind.sorted.rmdup.bam > ind.total.txt
+
+cat ind.total.txt | grep "genome" | awk '$2==0 {print "Breadth of Coverage =", 1-$5}; {sum+=$2*$3} END {print "Depth of Coverage =",sum/$4}; $2>=10{total+=$5} END {print "Percents of reads more than 10X =", total}; $2>=15{all+=$5} END {print "Percents of reads more than 15X =", all}' > ind_stat.txt
+
 # Call variants using HaplotypeCaller in GATK v4.0.9.
-gatk HaplotypeCaller -R ${ref} -ERC GVCF -I ind.sorted.rmdup.bam -O ind.g.vcf --genotyping-mode DISCOVERY --pcr-indel-model CONSERVATIVE
+gatk HaplotypeCaller -R ${ref} -ERC GVCF -I ind.sorted.rmdup.bam -O ind.g.vcf --genotyping-mode DISCOVERY --pcr-indel-model CONSERVATIVE \
 --sample-ploidy 2 --min-base-quality-score 5 --kmer-size 10 --kmer-size 25 --native-pair-hmm-threads 40
 gatk CombineGVCFs -R ${ref} -V gvcf.list -O com.g.vcf.gz
 gatk GenotypeGVCFs -R ${ref} -V com.g.vcf.gz -O com.vcf.gz
