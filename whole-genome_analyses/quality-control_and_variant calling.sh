@@ -31,4 +31,12 @@ gatk GenotypeGVCFs -R ${ref} -V com.g.vcf.gz -O com.vcf.gz
 --minQ 30 --minDP 5 --maxDP 100 --max-missing 0.95 --remove-indels \
 --recode --out flitered_vcf
 
+# Retain autosomal SNPs using BLAST+2.2.26
+parus_major_genome=parus.major.fa
+makeblastdb -in ${parus_major_genome} -dbtype nucl  -title parus_major_fa
+blastn -query ${ref} -db ${parus_major_genome} -evalue 1e-40 -outfmt 7 -out pm_ll_blast.out
+
+
+
+
 
