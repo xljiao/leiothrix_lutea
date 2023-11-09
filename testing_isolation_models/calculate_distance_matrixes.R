@@ -50,7 +50,7 @@ pc2 <- read.csv(file="pca2_scores.csv",header=T,row.names=1)
 edist_pc2 <- as.matrix(dist(pc2))
 write.table(edist_pc2, 'matrix_bio_pc2.csv', quote=FALSE, sep=",")
 
-### create sampling sites raster, the grid size needs to be the same as the resistance surface grid size
+## create sampling sites raster, the grid size needs to be the same as the resistance surface grid size
 testa <- raster("leiothrixlutea_avg.asc")  # resistance surface raster layer
 k <- read.csv("location.csv") #location
 cor <- k[,c(2,3)] #extract the geographical coordinates of sampling sites
