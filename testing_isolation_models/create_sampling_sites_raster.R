@@ -1,3 +1,6 @@
+library(sp)
+library(raster)
+
 ## create sampling sites raster, the grid size needs to be the same as the resistance surface grid size
 testa <- raster("leiothrixlutea_avg.asc")  # resistance surface raster layer
 k <- read.csv("location.csv") #location
