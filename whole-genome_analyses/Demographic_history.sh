@@ -6,6 +6,7 @@ vcfutils_pl=~/bcftools-1.3.1/vcfutils.pl
 samtools mpileup -C50 -uf ${ref} ind.sotred.rmdup.bam | bcftools call -c -V indels | ${vcfutils_pl} vcf2fq -d 6 -D 36 | gzip > ind.fq.gz
 fq2psmcfa} -q20 ind.fq.gz > ind.psmcfa
 
+# using the python scripts remove_scf.py to remove the sex chromosomes.
 /usr/bin/python2.7 remove_scf.py chr.list ind.psmcfa
 
 # run psmc
