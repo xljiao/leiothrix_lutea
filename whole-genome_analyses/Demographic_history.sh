@@ -30,3 +30,6 @@ done
 smc++ estimate --timepoints 1 1000000 --em-iterations 30 --cores 20 --spline pchip -o ~/pop1_analysis/ 4.6e-9 ~/pop1_out/*.smc.gz
 
 smc++ plot plot.pdf -g 2.5 ~/pop1/model.final.json ~/pop2/model.final.json
+
+# joint-demographic history
+# we created the dadi format SFS files by python script 'vcf_to_dadi.py' from Popgen Pipeline Platform (PPP, https://github.com/jaredgk/PPP) and examined all dempgraphic models using dadi_pipeline (https://github.com/dportik/dadi_pipeline).
