@@ -29,9 +29,4 @@ done
 
 smc++ estimate --timepoints 1 1000000 --em-iterations 30 --cores 20 --spline pchip -o ~/pop1_analysis/ 4.6e-9 ~/pop1_out/*.smc.gz
 
-cp ~/pop1_out/model.final.json estimate_iter30_0.1ma/hw_model.final.json
-cp bw_analysis/model.final.json estimate_iter30_0.1ma/bw_model.final.json
-cp sy_analysis/model.final.json estimate_iter30_0.1ma/sy_model.final.json
-run --rm -v $PWD:/home/haoyan/Podoces/Corvus_cornix_V5/smc++/estimate_iter30_0.1ma/ terhorst/smcpp:latest plot $PWD/hw_g_0.1ma.pdf $PWD/hw_model.final.json docker run --rm -v $PWD:/home/haoyan/Podoces/Corvus_cornix_V5/smc++/estimate_iter30_0.1ma/ terhorst/smcpp:latest plot $PWD/bw_g_0.1ma.pdf $PWD/bw_model.final.json docker run --rm -v $PWD:/home/haoyan/Podoces/Corvus_cornix_V5/smc++/estimate_iter30_0.1ma/ terhorst/smcpp:latest plot $PWD/sy_g_0.1ma.pdf $PWD/sy_model.final.jsondocker run --rm -v $PWD:/home/haoyan/Podoces/Corvus_cornix_V5/smc++/estimate_iter30_0.1ma/ terhorst/smcpp:latest plot $PWD/year_0.1ma.pdf -g 3.783783 $PWD/hw_model.final.json docker run --rm -v $PWD:/home/haoyan/Podoces/Corvus_cornix_V5/smc++/estimate_iter30_0.1ma/ terhorst/smcpp:latest plot $PWD/year_0.1ma.pdf -g 4.171668 $PWD/bw_model.final.json docker run --rm -v $PWD:/home/haoyan/Podoces/Corvus_cornix_V5/smc++/estimate_iter30_0.1ma/ terhorst/smcpp:latest plot $PWD/year_0.1ma.pdf -g 4.906858 $PWD/sy_model.final.jsondocker run --rm -v $PWD:/home/haoyan/Podoces/Corvus_cornix_V5/smc++/estimate_iter30_0.1ma/ terhorst/smcpp:latest plot $PWD/all_g_0.1ma $PWD/hw_model.final.json $PWD/bw_model.final.json $PWD/sy_model.final.json
-smc++ plot pop1.pdf -g 2.5 ~/pop1_analysis/model.final.json
-
+smc++ plot plot.pdf -g 2.5 ~/pop1/model.final.json ~/pop2/model.final.json
