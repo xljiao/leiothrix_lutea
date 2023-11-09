@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-import sys
-import time
 '''
-
 # handel fasta files，keep some scaffolds or chromosomes
 # need to provide the fasta file to process, the scaffold or chr list to keep, and the generated file name
 # Usage : python remove_scf.py raw.fa scf.list fin.fa
-
 '''
+
+import sys
+import time
 
 fasta_file_name = sys.argv[1]
 scf_file_name = sys.argv[2]
