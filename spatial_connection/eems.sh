@@ -1,3 +1,5 @@
+/home/jiaoxiaolu_org/software/eems/bed2diffs/src/bed2diffs_v1 --bfile eems --nthreads 2 
+
 /home/jiaoxiaolu_org/software/eems/runeems_snps/src/runeems_snps --params params-chain1.ini --seed 123 
 /home/jiaoxiaolu_org/software/eems/runeems_snps/src/runeems_snps --params params-chain2.ini --seed 234 
 /home/jiaoxiaolu_org/software/eems/runeems_snps/src/runeems_snps --params params-chain3.ini --seed 345 
