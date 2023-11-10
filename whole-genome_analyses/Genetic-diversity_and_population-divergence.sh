@@ -30,7 +30,7 @@ vcftools --vcf filtered_autosomal.vcf --keep pop.list --TajimaD 50000 --out pop_
 vcftools --vcf filtered_autosomal.vcf --keep pop.list --window-pi 50000 --out pop_pi
 vcftools --vcf filtered_autosomal.vcf --weir-fst-pop pop1.list --weir-fst-pop pop2.list --fst-window-size 50000 --out pop1_2
 
-# calculated the dxy
+# calculated the dxy, python scripts were developed by Simon Martin (https://github.com/simonhmartin)
 python2.7 parseVCF.py -v filtered_autosomal.vcf -o filtered_autosomal.calls -m geno
 python2.7 mergeCalls.py -f filtered_autosomal.calls -m all -I ${ref}.fai -o filtered_autosomal.calls.merge
 
